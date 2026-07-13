@@ -1,4 +1,4 @@
-﻿import { ClipboardList } from 'lucide-react'
+import { ClipboardList } from 'lucide-react'
 import { EmptyState } from '@/components/empty-state'
 import { PageHeader } from '@/components/page-header'
 import { PRIORIDADE_LABELS, SETOR_LABELS, SETORES } from '@/lib/constants'
@@ -28,8 +28,8 @@ export default async function DiagnosticosPage() {
         description="Mapeie a situacao atual da empresa cliente, os problemas, oportunidades e prioridades por area de gestao."
       />
 
-      <section className="grid gap-6 xl:grid-cols-[440px_1fr]">
-        <form action={createDiagnostico} className="panel space-y-4 p-5">
+      <section className="space-y-8">
+        <form action={createDiagnostico} className="document-page space-y-6">
           <div className="flex items-center gap-2">
             <ClipboardList className="h-5 w-5 text-brand-bronze" />
             <h3 className="font-semibold text-brand-ink">Nova analise</h3>
@@ -37,7 +37,7 @@ export default async function DiagnosticosPage() {
 
           <div className="space-y-1.5">
             <label className="label" htmlFor="empresa_id">Empresa</label>
-            <select className="field" id="empresa_id" name="empresa_id" required>
+            <select className="document-field" id="empresa_id" name="empresa_id" required>
               <option value="">Selecione</option>
               {empresas.map((empresa) => <option key={empresa.id} value={empresa.id}>{empresa.nome}</option>)}
             </select>
@@ -46,24 +46,24 @@ export default async function DiagnosticosPage() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
               <label className="label" htmlFor="setor">Area analisada</label>
-              <select className="field" id="setor" name="setor">
+              <select className="document-field" id="setor" name="setor">
                 {SETORES.map((setor) => <option key={setor} value={setor}>{SETOR_LABELS[setor]}</option>)}
               </select>
             </div>
             <div className="space-y-1.5">
               <label className="label" htmlFor="prioridade">Prioridade</label>
-              <select className="field" id="prioridade" name="prioridade">
+              <select className="document-field" id="prioridade" name="prioridade">
                 {prioridades.map((prioridade) => <option key={prioridade} value={prioridade}>{PRIORIDADE_LABELS[prioridade]}</option>)}
               </select>
             </div>
           </div>
 
-          <div className="space-y-1.5"><label className="label" htmlFor="situacao_atual">Situacao atual</label><textarea className="field min-h-20" id="situacao_atual" name="situacao_atual" /></div>
-          <div className="space-y-1.5"><label className="label" htmlFor="problemas_identificados">Problemas identificados</label><textarea className="field min-h-20" id="problemas_identificados" name="problemas_identificados" /></div>
-          <div className="space-y-1.5"><label className="label" htmlFor="parecer">Parecer consultivo</label><textarea className="field min-h-28" id="parecer" name="parecer" required /></div>
-          <div className="space-y-1.5"><label className="label" htmlFor="pontos_fortes">Pontos fortes</label><textarea className="field min-h-20" id="pontos_fortes" name="pontos_fortes" /></div>
-          <div className="space-y-1.5"><label className="label" htmlFor="pontos_fracos">Pontos fracos</label><textarea className="field min-h-20" id="pontos_fracos" name="pontos_fracos" /></div>
-          <div className="space-y-1.5"><label className="label" htmlFor="recomendacoes">Recomendacoes iniciais</label><textarea className="field min-h-20" id="recomendacoes" name="recomendacoes" /></div>
+          <div className="space-y-1.5"><label className="label" htmlFor="situacao_atual">Situacao atual</label><textarea className="document-field min-h-20" id="situacao_atual" name="situacao_atual" /></div>
+          <div className="space-y-1.5"><label className="label" htmlFor="problemas_identificados">Problemas identificados</label><textarea className="document-field min-h-20" id="problemas_identificados" name="problemas_identificados" /></div>
+          <div className="space-y-1.5"><label className="label" htmlFor="parecer">Parecer consultivo</label><textarea className="document-field min-h-28" id="parecer" name="parecer" required /></div>
+          <div className="space-y-1.5"><label className="label" htmlFor="pontos_fortes">Pontos fortes</label><textarea className="document-field min-h-20" id="pontos_fortes" name="pontos_fortes" /></div>
+          <div className="space-y-1.5"><label className="label" htmlFor="pontos_fracos">Pontos fracos</label><textarea className="document-field min-h-20" id="pontos_fracos" name="pontos_fracos" /></div>
+          <div className="space-y-1.5"><label className="label" htmlFor="recomendacoes">Recomendacoes iniciais</label><textarea className="document-field min-h-20" id="recomendacoes" name="recomendacoes" /></div>
 
           <button className="btn-primary w-full" disabled={!empresas.length} type="submit">Salvar diagnostico</button>
         </form>
@@ -88,3 +88,4 @@ export default async function DiagnosticosPage() {
     </>
   )
 }
+
