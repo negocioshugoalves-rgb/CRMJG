@@ -47,4 +47,5 @@ export async function createProposta(formData: FormData) {
   revalidatePath('/dashboard/propostas')
   revalidatePath(`/dashboard/empresas/${empresaId}`)
   revalidatePath(`/dashboard/empresas/${empresaId}/propostas`)
+  redirect(text(formData, 'redirect_to') || `/dashboard/empresas/${empresaId}/propostas`)
 }

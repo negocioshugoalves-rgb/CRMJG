@@ -37,4 +37,5 @@ export async function createInteracao(formData: FormData) {
   revalidatePath('/dashboard/interacoes')
   revalidatePath(`/dashboard/empresas/${empresaId}`)
   revalidatePath(`/dashboard/empresas/${empresaId}/interacoes`)
+  redirect(text(formData, 'redirect_to') || `/dashboard/empresas/${empresaId}/interacoes`)
 }

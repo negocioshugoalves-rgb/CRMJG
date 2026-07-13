@@ -45,4 +45,5 @@ export async function createPlanoAcao(formData: FormData) {
   revalidatePath('/dashboard/planos-acao')
   revalidatePath(`/dashboard/empresas/${empresaId}`)
   revalidatePath(`/dashboard/empresas/${empresaId}/plano-acao`)
+  redirect(text(formData, 'redirect_to') || `/dashboard/empresas/${empresaId}/plano-acao`)
 }

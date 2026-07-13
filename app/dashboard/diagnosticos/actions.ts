@@ -42,4 +42,5 @@ export async function createDiagnostico(formData: FormData) {
   revalidatePath('/dashboard/diagnosticos')
   revalidatePath(`/dashboard/empresas/${empresaId}`)
   revalidatePath(`/dashboard/empresas/${empresaId}/diagnostico`)
+  redirect(text(formData, 'redirect_to') || `/dashboard/empresas/${empresaId}/diagnostico`)
 }
