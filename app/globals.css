@@ -33,6 +33,22 @@ textarea {
   @apply w-full rounded-md border border-stone-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-light;
 }
 
+.document-field {
+  @apply w-full rounded-md border border-stone-300 bg-white px-4 py-3 text-base leading-7 outline-none transition focus:border-brand-gold focus:ring-2 focus:ring-brand-light;
+}
+
+.document-textarea {
+  @apply min-h-40 resize-y;
+}
+
+.document-page {
+  @apply mx-auto w-full max-w-5xl rounded-lg border border-stone-200 bg-white p-5 shadow-sm sm:p-8;
+}
+
+.document-section {
+  @apply border-b border-stone-200 pb-6 last:border-b-0 last:pb-0;
+}
+
 .label {
   @apply text-xs font-semibold uppercase tracking-wide text-stone-600;
 }
