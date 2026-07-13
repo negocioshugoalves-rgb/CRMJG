@@ -24,37 +24,37 @@ export default async function EmpresasPage() {
         description="Cadastre prospects e clientes, acompanhe responsaveis e mantenha o status do funil sempre atualizado."
       />
 
-      <section className="grid gap-6 xl:grid-cols-[420px_1fr]">
-        <form action={createEmpresa} className="panel space-y-4 p-5">
+      <section className="space-y-8">
+        <form action={createEmpresa} className="document-page space-y-6">
           <div className="flex items-center gap-2">
             <Building2 className="h-5 w-5 text-brand-bronze" />
             <h3 className="font-semibold text-brand-ink">Nova empresa</h3>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-1">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
               <label className="label" htmlFor="nome">
                 Nome
               </label>
-              <input className="field" id="nome" name="nome" required />
+              <input className="document-field" id="nome" name="nome" required />
             </div>
             <div className="space-y-1.5">
               <label className="label" htmlFor="cnpj">
                 CNPJ
               </label>
-              <input className="field" id="cnpj" name="cnpj" required />
+              <input className="document-field" id="cnpj" name="cnpj" required />
             </div>
             <div className="space-y-1.5">
               <label className="label" htmlFor="segmento">
                 Segmento
               </label>
-              <input className="field" id="segmento" name="segmento" required />
+              <input className="document-field" id="segmento" name="segmento" required />
             </div>
             <div className="space-y-1.5">
               <label className="label" htmlFor="porte">
                 Porte
               </label>
-              <select className="field" id="porte" name="porte">
+              <select className="document-field" id="porte" name="porte">
                 <option value="">Nao informado</option>
                 <option>Pequena</option>
                 <option>Media</option>
@@ -65,31 +65,31 @@ export default async function EmpresasPage() {
               <label className="label" htmlFor="contato_nome">
                 Contato
               </label>
-              <input className="field" id="contato_nome" name="contato_nome" required />
+              <input className="document-field" id="contato_nome" name="contato_nome" required />
             </div>
             <div className="space-y-1.5">
               <label className="label" htmlFor="contato_telefone">
                 Telefone
               </label>
-              <input className="field" id="contato_telefone" name="contato_telefone" />
+              <input className="document-field" id="contato_telefone" name="contato_telefone" />
             </div>
             <div className="space-y-1.5">
               <label className="label" htmlFor="contato_email">
                 E-mail
               </label>
-              <input className="field" id="contato_email" name="contato_email" type="email" />
+              <input className="document-field" id="contato_email" name="contato_email" type="email" />
             </div>
             <div className="space-y-1.5">
               <label className="label" htmlFor="origem_prospeccao">
                 Origem
               </label>
-              <input className="field" id="origem_prospeccao" name="origem_prospeccao" />
+              <input className="document-field" id="origem_prospeccao" name="origem_prospeccao" />
             </div>
             <div className="space-y-1.5">
               <label className="label" htmlFor="status_funil">
                 Status
               </label>
-              <select className="field" id="status_funil" name="status_funil">
+              <select className="document-field" id="status_funil" name="status_funil">
                 {STATUS_FUNIL.map((status) => (
                   <option key={status} value={status}>
                     {STATUS_FUNIL_LABELS[status]}
@@ -97,11 +97,11 @@ export default async function EmpresasPage() {
                 ))}
               </select>
             </div>
-            <div className="space-y-1.5 sm:col-span-2 xl:col-span-1">
+            <div className="space-y-1.5 sm:col-span-2">
               <label className="label" htmlFor="observacoes">
                 Observacoes
               </label>
-              <textarea className="field min-h-24" id="observacoes" name="observacoes" />
+              <textarea className="document-field min-h-24" id="observacoes" name="observacoes" />
             </div>
           </div>
 
@@ -146,3 +146,4 @@ export default async function EmpresasPage() {
     </>
   )
 }
+
