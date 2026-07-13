@@ -31,8 +31,8 @@ export default async function InteracoesPage() {
         description="Registre contatos, reunioes, mensagens e proximos follow-ups para manter o relacionamento vivo."
       />
 
-      <section className="grid gap-6 xl:grid-cols-[420px_1fr]">
-        <form action={createInteracao} className="panel space-y-4 p-5">
+      <section className="space-y-8">
+        <form action={createInteracao} className="document-page space-y-6">
           <div className="flex items-center gap-2">
             <MessageSquare className="h-5 w-5 text-brand-bronze" />
             <h3 className="font-semibold text-brand-ink">Nova interacao</h3>
@@ -42,7 +42,7 @@ export default async function InteracoesPage() {
             <label className="label" htmlFor="empresa_id">
               Empresa
             </label>
-            <select className="field" id="empresa_id" name="empresa_id" required>
+            <select className="document-field" id="empresa_id" name="empresa_id" required>
               <option value="">Selecione</option>
               {empresas.map((empresa) => (
                 <option key={empresa.id} value={empresa.id}>
@@ -57,7 +57,7 @@ export default async function InteracoesPage() {
               <label className="label" htmlFor="tipo">
                 Tipo
               </label>
-              <select className="field" id="tipo" name="tipo">
+              <select className="document-field" id="tipo" name="tipo">
                 <option value="ligacao">Ligacao</option>
                 <option value="reuniao">Reuniao</option>
                 <option value="email">E-mail</option>
@@ -69,7 +69,7 @@ export default async function InteracoesPage() {
               <label className="label" htmlFor="data">
                 Data
               </label>
-              <input className="field" id="data" name="data" type="datetime-local" />
+              <input className="document-field" id="data" name="data" type="datetime-local" />
             </div>
           </div>
 
@@ -77,14 +77,14 @@ export default async function InteracoesPage() {
             <label className="label" htmlFor="descricao">
               Descricao
             </label>
-            <textarea className="field min-h-28" id="descricao" name="descricao" required />
+            <textarea className="document-field min-h-28" id="descricao" name="descricao" required />
           </div>
 
           <div className="space-y-1.5">
             <label className="label" htmlFor="proximo_followup">
               Proximo follow-up
             </label>
-            <input className="field" id="proximo_followup" name="proximo_followup" type="date" />
+            <input className="document-field" id="proximo_followup" name="proximo_followup" type="date" />
           </div>
 
           <button className="btn-primary w-full" disabled={!empresas.length} type="submit">
@@ -125,3 +125,4 @@ export default async function InteracoesPage() {
     </>
   )
 }
+
