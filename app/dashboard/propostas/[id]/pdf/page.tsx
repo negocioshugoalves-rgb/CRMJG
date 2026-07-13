@@ -1,5 +1,6 @@
-﻿import { notFound } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { SETOR_LABELS, STATUS_ACAO_LABELS } from '@/lib/constants'
+import { PrintButton, PrintHint } from '@/components/print-button'
 import { createClient } from '@/lib/supabase/server'
 import type { Diagnostico, Empresa, PlanoAcao, Proposta } from '@/lib/types'
 
@@ -27,8 +28,9 @@ export default async function PropostaPdfPage({ params }: { params: { id: string
   return (
     <main className="min-h-screen bg-stone-100 p-6 print:bg-white print:p-0">
       <style>{`@page { size: A4; margin: 16mm; } @media print { .no-print { display: none; } .doc { box-shadow: none; padding: 0; } body { background: white; } }`}</style>
-      <div className="no-print mx-auto mb-4 flex max-w-4xl justify-end">
-        <p className="rounded-md bg-brand-ink px-4 py-2 text-sm font-semibold text-white">Use Ctrl+P ou Cmd+P para salvar em PDF</p>
+      <div className="no-print mx-auto mb-4 flex max-w-4xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <PrintHint />
+        <PrintButton label="Baixar proposta em PDF" />
       </div>
       <article className="doc mx-auto max-w-4xl bg-white p-10 shadow-sm">
         <header className="border-b-4 border-brand-gold pb-8">
@@ -55,4 +57,6 @@ export default async function PropostaPdfPage({ params }: { params: { id: string
     </main>
   )
 }
+
+
 
