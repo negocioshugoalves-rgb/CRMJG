@@ -2,7 +2,6 @@
   | 'prospeccao'
   | 'diagnostico'
   | 'proposta'
-  | 'projeto'
   | 'fechado_ganho'
   | 'fechado_perdido'
 
