@@ -3,7 +3,7 @@
 do $$
 begin
   if not exists (select 1 from pg_type where typname = 'status_funil') then
-    create type status_funil as enum ('prospeccao','diagnostico','proposta','projeto','fechado_ganho','fechado_perdido');
+    create type status_funil as enum ('prospeccao','diagnostico','proposta','fechado_ganho','fechado_perdido');
   end if;
   if not exists (select 1 from pg_type where typname = 'setor_diagnostico') then
     create type setor_diagnostico as enum ('comunicacao','financeiro','administrativo_rh','lideranca','processos','marketing','operacional','imagem_pessoal','comercial','qualidade');
