@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import { FileDown, FileText } from 'lucide-react'
 import { EmptyState } from '@/components/empty-state'
 import { PageHeader } from '@/components/page-header'
@@ -39,9 +39,10 @@ export default async function PropostasPage() {
           <div className="grid gap-4 sm:grid-cols-2"><div className="space-y-1.5"><label className="label" htmlFor="data_envio">Envio</label><input className="document-field" id="data_envio" name="data_envio" type="date" /></div><div className="space-y-1.5"><label className="label" htmlFor="data_validade">Validade</label><input className="document-field" id="data_validade" name="data_validade" type="date" /></div></div>
           <button className="btn-primary w-full" disabled={!empresas.length} type="submit">Salvar proposta</button>
         </form>
-        {propostas.length ? <div className="grid gap-4">{propostas.map((proposta) => <article className="panel p-5" key={proposta.id}><div className="flex flex-wrap items-start justify-between gap-4"><div><h3 className="font-semibold text-brand-ink">{proposta.titulo}</h3><p className="text-sm text-stone-500">{proposta.empresas?.nome || 'Empresa'}</p></div><span className="rounded-full bg-brand-paper px-3 py-1 text-xs font-semibold text-brand-bronze">{STATUS_PROPOSTA_LABELS[proposta.status]}</span></div>{proposta.resumo_diagnostico ? <p className="mt-4 text-sm leading-6 text-stone-700">{proposta.resumo_diagnostico}</p> : null}<div className="mt-4 flex flex-wrap gap-4 text-sm text-stone-600"><span>Investimento: {proposta.valor ? proposta.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}</span><span>Validade: {proposta.data_validade || '-'}</span></div><Link className="btn-secondary mt-4 w-fit" href={`/dashboard/propostas/${proposta.id}/pdf`} target="_blank"><FileDown className="h-4 w-4" /> Abrir PDF</Link></article>)}</div> : <EmptyState message="Nenhuma proposta cadastrada ainda." />}
+        {propostas.length ? <div className="grid gap-4">{propostas.map((proposta) => <article className="panel p-5" key={proposta.id}><div className="flex flex-wrap items-start justify-between gap-4"><div><h3 className="font-semibold text-brand-ink">{proposta.titulo}</h3><p className="text-sm text-stone-500">{proposta.empresas?.nome || 'Empresa'}</p></div><span className="rounded-full bg-brand-paper px-3 py-1 text-xs font-semibold text-brand-bronze">{STATUS_PROPOSTA_LABELS[proposta.status]}</span></div>{proposta.resumo_diagnostico ? <p className="mt-4 text-sm leading-6 text-stone-700">{proposta.resumo_diagnostico}</p> : null}<div className="mt-4 flex flex-wrap gap-4 text-sm text-stone-600"><span>Investimento: {proposta.valor ? proposta.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-'}</span><span>Validade: {proposta.data_validade || '-'}</span></div><Link className="btn-secondary mt-4 w-fit" href={`/dashboard/propostas/${proposta.id}/pdf`} target="_blank"><FileDown className="h-4 w-4" /> Baixar PDF</Link></article>)}</div> : <EmptyState message="Nenhuma proposta cadastrada ainda." />}
       </section>
     </>
   )
 }
+
 

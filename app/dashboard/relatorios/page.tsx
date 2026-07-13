@@ -1,4 +1,4 @@
-import { BarChart3, FileText } from 'lucide-react'
+﻿import { BarChart3, FileText } from 'lucide-react'
 import { EmptyState } from '@/components/empty-state'
 import { PageHeader } from '@/components/page-header'
 import { SETOR_LABELS, SETORES } from '@/lib/constants'

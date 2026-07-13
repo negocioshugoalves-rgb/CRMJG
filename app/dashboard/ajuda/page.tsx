@@ -1,4 +1,4 @@
-import {
+﻿import {
   BarChart3,
   Briefcase,
   Building2,
@@ -152,8 +152,8 @@ export default function AjudaPage() {
           <h3 className="text-lg font-bold text-brand-ink">Onde baixar o PDF da proposta</h3>
         </div>
         <ol className="mt-4 space-y-2 text-sm leading-6 text-stone-700">
-          <li>1. Entre em Propostas.</li>
-          <li>2. Cadastre ou localize a proposta desejada.</li>
+          <li>1. Entre em Empresas e abra o dossie da empresa desejada. Depois acesse a aba Propostas.</li>
+          <li>2. Cadastre ou localize a proposta dessa empresa.</li>
           <li>3. No card da proposta, clique em Abrir PDF ou Baixar PDF.</li>
           <li>4. Na pagina de PDF, clique em Baixar proposta em PDF.</li>
           <li>5. Na janela do navegador, selecione Salvar como PDF.</li>
@@ -188,7 +188,7 @@ export default function AjudaPage() {
       <section className="panel mt-6 p-5">
         <h3 className="text-lg font-bold text-brand-ink">Fluxo recomendado</h3>
         <p className="mt-3 text-sm leading-6 text-stone-700">
-          Comece cadastrando a empresa, registre o diagnostico por area, crie o plano
+          Comece cadastrando a empresa e abrindo o dossie dela. Dentro desse dossie, registre o diagnostico por area, crie o plano
           de acao, monte a proposta em PDF e, apos o aceite, acompanhe tudo em
           projetos, relatorios e indicadores. Assim o CRM documenta tanto a venda
           quanto a entrega da consultoria.
@@ -197,3 +197,4 @@ export default function AjudaPage() {
     </>
   )
 }
+

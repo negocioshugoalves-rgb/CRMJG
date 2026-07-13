@@ -1,4 +1,4 @@
-import { Briefcase } from 'lucide-react'
+﻿import { Briefcase } from 'lucide-react'
 import { EmptyState } from '@/components/empty-state'
 import { PageHeader } from '@/components/page-header'
 import { STATUS_PROJETO_LABELS } from '@/lib/constants'

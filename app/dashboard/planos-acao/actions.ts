@@ -12,13 +12,19 @@ function text(formData: FormData, key: string) {
 
 export async function createPlanoAcao(formData: FormData) {
   const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
   if (!user) redirect('/login')
 
   const empresaId = text(formData, 'empresa_id')
   const titulo = text(formData, 'titulo')
   const descricao = text(formData, 'descricao')
-  if (!empresaId || !titulo || !descricao) throw new Error('Preencha empresa, titulo e descricao.')
+
+  if (!empresaId || !titulo || !descricao) {
+    throw new Error('Preencha empresa, titulo e descricao.')
+  }
 
   await supabase.from('planos_acao').insert({
     empresa_id: empresaId,
@@ -37,4 +43,6 @@ export async function createPlanoAcao(formData: FormData) {
 
   revalidatePath('/dashboard')
   revalidatePath('/dashboard/planos-acao')
+  revalidatePath(`/dashboard/empresas/${empresaId}`)
+  revalidatePath(`/dashboard/empresas/${empresaId}/plano-acao`)
 }

@@ -40,4 +40,6 @@ export async function createDiagnostico(formData: FormData) {
 
   revalidatePath('/dashboard')
   revalidatePath('/dashboard/diagnosticos')
+  revalidatePath(`/dashboard/empresas/${empresaId}`)
+  revalidatePath(`/dashboard/empresas/${empresaId}/diagnostico`)
 }

@@ -1,4 +1,4 @@
-import { ListChecks } from 'lucide-react'
+﻿import { ListChecks } from 'lucide-react'
 import { EmptyState } from '@/components/empty-state'
 import { PageHeader } from '@/components/page-header'
 import { PRIORIDADE_LABELS, SETOR_LABELS, SETORES, STATUS_ACAO_LABELS } from '@/lib/constants'

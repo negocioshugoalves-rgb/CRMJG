@@ -137,3 +137,4 @@ export interface Interacao {
   data: string
   proximo_followup: string | null
 }
+

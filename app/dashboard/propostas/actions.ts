@@ -12,12 +12,18 @@ function text(formData: FormData, key: string) {
 
 export async function createProposta(formData: FormData) {
   const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
   if (!user) redirect('/login')
 
   const empresaId = text(formData, 'empresa_id')
   const titulo = text(formData, 'titulo')
-  if (!empresaId || !titulo) throw new Error('Selecione a empresa e informe o titulo.')
+
+  if (!empresaId || !titulo) {
+    throw new Error('Selecione a empresa e informe o titulo.')
+  }
 
   const valorTexto = text(formData, 'valor')
   const valor = valorTexto ? Number(valorTexto.replace(',', '.')) : null
@@ -39,4 +45,6 @@ export async function createProposta(formData: FormData) {
 
   revalidatePath('/dashboard')
   revalidatePath('/dashboard/propostas')
+  revalidatePath(`/dashboard/empresas/${empresaId}`)
+  revalidatePath(`/dashboard/empresas/${empresaId}/propostas`)
 }

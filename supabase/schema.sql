@@ -241,3 +241,4 @@ create policy "Usuarios autenticados criam relatorios" on public.relatorios for 
 
 drop policy if exists "Usuarios autenticados criam interacoes" on public.interacoes;
 create policy "Usuarios autenticados criam interacoes" on public.interacoes for insert to authenticated with check (auth.uid() = criado_por);
+

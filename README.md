@@ -1,6 +1,16 @@
-# CRM JG Represent
+﻿# CRM JG Represent
 
-Projeto Next.js pronto para GitHub e Vercel, com Supabase Auth, dashboard protegido e telas iniciais para empresas, diagnosticos, propostas, interacoes, usuarios, configuracoes e ajuda.
+Projeto Next.js pronto para GitHub e Vercel para uma consultoria empresarial. O fluxo principal cobre cliente, diagnostico empresarial, plano de acao, proposta em PDF, projeto aceito e relatorios de acompanhamento com indicadores.
+
+## Fluxo do sistema
+
+1. Cadastro da empresa cliente.
+2. Diagnostico por areas da empresa: comercial, financeiro, RH, lideranca, processos, marketing, operacional, comunicacao, imagem pessoal e qualidade.
+3. Plano de acao com o que sera feito, justificativa, responsavel, prazo, prioridade e resultado esperado.
+4. Proposta comercial com resumo do diagnostico, escopo, metodologia, cronograma, investimento e condicoes.
+5. Exportacao da proposta em PDF pela pagina de impressao.
+6. Projeto ativo apos aceite da proposta.
+7. Relatorios de andamento com atividades, resultados, pontos de atencao, proximos passos e indicadores.
 
 ## Requisitos
 
@@ -64,7 +74,11 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY
 - `/dashboard`
 - `/dashboard/empresas`
 - `/dashboard/diagnosticos`
+- `/dashboard/planos-acao`
 - `/dashboard/propostas`
+- `/dashboard/propostas/[id]/pdf`
+- `/dashboard/projetos`
+- `/dashboard/relatorios`
 - `/dashboard/interacoes`
 - `/dashboard/usuarios`
 - `/dashboard/configuracoes`

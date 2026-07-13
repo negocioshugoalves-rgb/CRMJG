@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+﻿import { notFound } from 'next/navigation'
 import { SETOR_LABELS, STATUS_ACAO_LABELS } from '@/lib/constants'
 import { PrintButton, PrintHint } from '@/components/print-button'
 import { createClient } from '@/lib/supabase/server'

@@ -1,4 +1,4 @@
-'use server'
+﻿'use server'
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -15,9 +15,7 @@ export async function createInteracao(formData: FormData) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user) {
-    redirect('/login')
-  }
+  if (!user) redirect('/login')
 
   const empresaId = text(formData, 'empresa_id')
   const descricao = text(formData, 'descricao')
@@ -37,4 +35,6 @@ export async function createInteracao(formData: FormData) {
 
   revalidatePath('/dashboard')
   revalidatePath('/dashboard/interacoes')
+  revalidatePath(`/dashboard/empresas/${empresaId}`)
+  revalidatePath(`/dashboard/empresas/${empresaId}/interacoes`)
 }

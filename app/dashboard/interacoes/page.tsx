@@ -1,4 +1,4 @@
-import { MessageSquare } from 'lucide-react'
+﻿import { MessageSquare } from 'lucide-react'
 import { EmptyState } from '@/components/empty-state'
 import { PageHeader } from '@/components/page-header'
 import { createClient } from '@/lib/supabase/server'

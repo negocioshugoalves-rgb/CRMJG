@@ -52,3 +52,4 @@ export const STATUS_PROJETO_LABELS = {
   concluido: 'Concluido',
   cancelado: 'Cancelado',
 } as const
+
