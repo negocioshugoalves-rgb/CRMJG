@@ -8,22 +8,60 @@ import type { Diagnostico, Empresa } from '@/lib/types'
 
 export const dynamic = 'force-dynamic'
 
-type DiagnosticoComEmpresa = Diagnostico & { empresas?: Pick<Empresa, 'id' | 'nome'> | null }
+type DiagnosticoComEmpresa = Diagnostico & { empresas?: Pick<Empresa, 'id' | 'nome' | 'segmento'> | null }
+
+type GrupoDiagnostico = {
+  empresa: Pick<Empresa, 'id' | 'nome' | 'segmento'>
+  total: number
+  setores: string[]
+  prioridadeMaisAlta: Diagnostico['prioridade']
+  ultimoParecer: string
+}
+
+const pesoPrioridade: Record<Diagnostico['prioridade'], number> = { baixa: 1, media: 2, alta: 3, critica: 4 }
+
+function agruparPorEmpresa(diagnosticos: DiagnosticoComEmpresa[]) {
+  const grupos = new Map<string, GrupoDiagnostico>()
+
+  diagnosticos.forEach((diagnostico) => {
+    if (!diagnostico.empresas?.id) return
+    const atual = grupos.get(diagnostico.empresas.id)
+    const setor = SETOR_LABELS[diagnostico.setor]
+
+    if (!atual) {
+      grupos.set(diagnostico.empresas.id, {
+        empresa: diagnostico.empresas,
+        total: 1,
+        setores: [setor],
+        prioridadeMaisAlta: diagnostico.prioridade,
+        ultimoParecer: diagnostico.parecer,
+      })
+      return
+    }
+
+    atual.total += 1
+    if (!atual.setores.includes(setor)) atual.setores.push(setor)
+    if (pesoPrioridade[diagnostico.prioridade] > pesoPrioridade[atual.prioridadeMaisAlta]) atual.prioridadeMaisAlta = diagnostico.prioridade
+    if (!atual.ultimoParecer) atual.ultimoParecer = diagnostico.parecer
+  })
+
+  return Array.from(grupos.values())
+}
 
 export default async function DiagnosticosPage() {
   const supabase = createClient()
   const { data } = await supabase
     .from('diagnosticos')
-    .select('*, empresas(id,nome)')
+    .select('*, empresas(id,nome,segmento)')
     .order('avaliado_em', { ascending: false })
 
-  const diagnosticos = (data ?? []) as DiagnosticoComEmpresa[]
+  const grupos = agruparPorEmpresa((data ?? []) as DiagnosticoComEmpresa[])
 
   return (
     <>
-      <PageHeader title="Diagnosticos" description="Visao geral das analises cadastradas. Clique em um card para abrir o detalhe no dossie da empresa." />
+      <PageHeader title="Diagnosticos" description="Uma visao por empresa. Clique no card para abrir todos os diagnosticos do dossie." />
       <div className="mb-6 flex justify-end"><Link className="btn-primary" href="/dashboard/diagnosticos/novo"><Plus className="h-4 w-4" /> Novo diagnostico</Link></div>
-      {diagnosticos.length ? <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{diagnosticos.map((diagnostico) => <Link className="panel p-5 transition hover:-translate-y-0.5 hover:shadow-md" href={diagnostico.empresas?.id ? `/dashboard/empresas/${diagnostico.empresas.id}/diagnostico/${diagnostico.id}` : '/dashboard/empresas'} key={diagnostico.id}><div className="flex items-start justify-between gap-4"><div><h3 className="font-semibold text-brand-ink">{diagnostico.empresas?.nome || 'Empresa'}</h3><p className="mt-1 text-sm text-stone-500">{SETOR_LABELS[diagnostico.setor]}</p></div><ArrowRight className="h-4 w-4 text-stone-400" /></div><span className="mt-4 inline-flex rounded-full bg-brand-paper px-3 py-1 text-xs font-semibold text-brand-bronze">{PRIORIDADE_LABELS[diagnostico.prioridade]}</span><p className="mt-4 line-clamp-3 text-sm leading-6 text-stone-700">{diagnostico.parecer}</p></Link>)}</section> : <EmptyState message="Nenhum diagnostico cadastrado. Crie o primeiro diagnostico para iniciar a analise." />}
+      {grupos.length ? <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{grupos.map((grupo) => <Link className="panel p-5 transition hover:-translate-y-0.5 hover:shadow-md" href={`/dashboard/empresas/${grupo.empresa.id}/diagnostico`} key={grupo.empresa.id}><div className="flex items-start justify-between gap-4"><div><h3 className="font-semibold text-brand-ink">{grupo.empresa.nome}</h3><p className="mt-1 text-sm text-stone-500">{grupo.empresa.segmento}</p></div><ArrowRight className="h-4 w-4 text-stone-400" /></div><div className="mt-4 flex flex-wrap gap-2"><span className="rounded-full bg-brand-paper px-3 py-1 text-xs font-semibold text-brand-bronze">{grupo.total} diagnostico{grupo.total === 1 ? '' : 's'}</span><span className="rounded-full bg-stone-100 px-3 py-1 text-xs font-semibold text-stone-700">Maior prioridade: {PRIORIDADE_LABELS[grupo.prioridadeMaisAlta]}</span></div><p className="mt-4 text-sm leading-6 text-stone-700">Areas: {grupo.setores.join(', ')}</p>{grupo.ultimoParecer ? <p className="mt-3 line-clamp-3 text-sm leading-6 text-stone-600">{grupo.ultimoParecer}</p> : null}</Link>)}</section> : <EmptyState message="Nenhum diagnostico cadastrado. Crie o primeiro diagnostico para iniciar a analise." />}
     </>
   )
 }

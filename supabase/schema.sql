@@ -176,9 +176,13 @@ end $$;
 
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
+declare
+  v_tipo text;
 begin
-  insert into public.usuarios (id, email, nome_completo)
-  values (new.id, coalesce(new.email, ''), coalesce(new.raw_user_meta_data ->> 'nome_completo', split_part(coalesce(new.email, ''), '@', 1)))
+  select case when exists (select 1 from public.usuarios) then 'user' else 'master' end into v_tipo;
+
+  insert into public.usuarios (id, email, nome_completo, tipo)
+  values (new.id, coalesce(new.email, ''), coalesce(new.raw_user_meta_data ->> 'nome_completo', split_part(coalesce(new.email, ''), '@', 1)), v_tipo)
   on conflict (id) do nothing;
   return new;
 end;
@@ -186,6 +190,13 @@ $$;
 
 drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created after insert on auth.users for each row execute function public.handle_new_user();
+with primeiro_usuario as (
+  select id from public.usuarios order by criado_em asc limit 1
+)
+update public.usuarios
+set tipo = 'master'
+where id in (select id from primeiro_usuario)
+  and tipo <> 'master';
 
 alter table public.usuarios enable row level security;
 alter table public.empresas enable row level security;
@@ -244,5 +255,6 @@ create policy "Usuarios autenticados criam relatorios" on public.relatorios for 
 
 drop policy if exists "Usuarios autenticados criam interacoes" on public.interacoes;
 create policy "Usuarios autenticados criam interacoes" on public.interacoes for insert to authenticated with check (auth.uid() = criado_por);
+
 
 
