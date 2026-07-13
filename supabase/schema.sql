@@ -230,6 +230,9 @@ create policy "Usuarios autenticados criam propostas" on public.propostas for in
 drop policy if exists "Usuarios autenticados criam projetos" on public.projetos;
 create policy "Usuarios autenticados criam projetos" on public.projetos for insert to authenticated with check (auth.uid() = criado_por);
 
+drop policy if exists "Usuarios autenticados atualizam seus projetos" on public.projetos;
+create policy "Usuarios autenticados atualizam seus projetos" on public.projetos for update to authenticated using (auth.uid() = criado_por) with check (auth.uid() = criado_por);
+
 drop policy if exists "Usuarios autenticados criam indicadores" on public.indicadores;
 create policy "Usuarios autenticados criam indicadores" on public.indicadores for insert to authenticated with check (auth.uid() = criado_por);
 
@@ -241,4 +244,5 @@ create policy "Usuarios autenticados criam relatorios" on public.relatorios for 
 
 drop policy if exists "Usuarios autenticados criam interacoes" on public.interacoes;
 create policy "Usuarios autenticados criam interacoes" on public.interacoes for insert to authenticated with check (auth.uid() = criado_por);
+
 
