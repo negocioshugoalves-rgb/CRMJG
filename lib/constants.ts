@@ -4,7 +4,6 @@ export const STATUS_FUNIL_LABELS: Record<StatusFunil, string> = {
   prospeccao: 'Prospeccao',
   diagnostico: 'Diagnostico',
   proposta: 'Proposta',
-  projeto: 'Projeto ativo',
   fechado_ganho: 'Fechado ganho',
   fechado_perdido: 'Fechado perdido',
 }
