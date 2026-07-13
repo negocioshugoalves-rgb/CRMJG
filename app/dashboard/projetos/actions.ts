@@ -24,7 +24,7 @@ export async function createProjeto(formData: FormData) {
     data_fim_prevista: text(formData, 'data_fim_prevista'),
     criado_por: user.id,
   })
-  await supabase.from('empresas').update({ status_funil: 'projeto' }).eq('id', empresaId)
+  await supabase.from('empresas').update({ status_funil: 'fechado_ganho' }).eq('id', empresaId)
   revalidatePath('/dashboard')
   revalidatePath('/dashboard/projetos')
 }
