@@ -1,4 +1,4 @@
-﻿import { BarChart3, FileText } from 'lucide-react'
+import { BarChart3, FileText } from 'lucide-react'
 import { EmptyState } from '@/components/empty-state'
 import { PageHeader } from '@/components/page-header'
 import { SETOR_LABELS, SETORES } from '@/lib/constants'
@@ -31,25 +31,25 @@ export default async function RelatoriosPage() {
   return (
     <>
       <PageHeader title="Relatorios e indicadores" description="Registre o andamento do projeto, resultados alcançados, pontos de atencao e proximos passos com indicadores mensuraveis." />
-      <section className="grid gap-6 xl:grid-cols-[420px_1fr]">
+      <section className="space-y-8">
         <div className="space-y-6">
-          <form action={createIndicador} className="panel space-y-4 p-5">
+          <form action={createIndicador} className="document-page space-y-6">
             <div className="flex items-center gap-2"><BarChart3 className="h-5 w-5 text-brand-bronze" /><h3 className="font-semibold text-brand-ink">Novo indicador</h3></div>
-            <div className="space-y-1.5"><label className="label" htmlFor="projeto_id_indicador">Projeto</label><select className="field" id="projeto_id_indicador" name="projeto_id" required><option value="">Selecione</option>{projetos.map((projeto) => <option key={projeto.id} value={projeto.id}>{projeto.nome}</option>)}</select></div>
-            <div className="space-y-1.5"><label className="label" htmlFor="nome">Indicador</label><input className="field" id="nome" name="nome" required /></div>
-            <div className="grid gap-4 sm:grid-cols-2"><div className="space-y-1.5"><label className="label" htmlFor="area">Area</label><select className="field" id="area" name="area"><option value="">Geral</option>{SETORES.map((setor) => <option key={setor} value={setor}>{SETOR_LABELS[setor]}</option>)}</select></div><div className="space-y-1.5"><label className="label" htmlFor="unidade">Unidade</label><input className="field" id="unidade" name="unidade" placeholder="%, R$, dias..." /></div></div>
-            <div className="grid gap-4 sm:grid-cols-3"><div className="space-y-1.5"><label className="label" htmlFor="valor_inicial">Inicial</label><input className="field" id="valor_inicial" name="valor_inicial" type="number" step="0.01" /></div><div className="space-y-1.5"><label className="label" htmlFor="valor_atual">Atual</label><input className="field" id="valor_atual" name="valor_atual" type="number" step="0.01" /></div><div className="space-y-1.5"><label className="label" htmlFor="meta">Meta</label><input className="field" id="meta" name="meta" type="number" step="0.01" /></div></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="projeto_id_indicador">Projeto</label><select className="document-field" id="projeto_id_indicador" name="projeto_id" required><option value="">Selecione</option>{projetos.map((projeto) => <option key={projeto.id} value={projeto.id}>{projeto.nome}</option>)}</select></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="nome">Indicador</label><input className="document-field" id="nome" name="nome" required /></div>
+            <div className="grid gap-4 sm:grid-cols-2"><div className="space-y-1.5"><label className="label" htmlFor="area">Area</label><select className="document-field" id="area" name="area"><option value="">Geral</option>{SETORES.map((setor) => <option key={setor} value={setor}>{SETOR_LABELS[setor]}</option>)}</select></div><div className="space-y-1.5"><label className="label" htmlFor="unidade">Unidade</label><input className="document-field" id="unidade" name="unidade" placeholder="%, R$, dias..." /></div></div>
+            <div className="grid gap-4 sm:grid-cols-3"><div className="space-y-1.5"><label className="label" htmlFor="valor_inicial">Inicial</label><input className="document-field" id="valor_inicial" name="valor_inicial" type="number" step="0.01" /></div><div className="space-y-1.5"><label className="label" htmlFor="valor_atual">Atual</label><input className="document-field" id="valor_atual" name="valor_atual" type="number" step="0.01" /></div><div className="space-y-1.5"><label className="label" htmlFor="meta">Meta</label><input className="document-field" id="meta" name="meta" type="number" step="0.01" /></div></div>
             <button className="btn-primary w-full" disabled={!projetos.length} type="submit">Salvar indicador</button>
           </form>
-          <form action={createRelatorio} className="panel space-y-4 p-5">
+          <form action={createRelatorio} className="document-page space-y-6">
             <div className="flex items-center gap-2"><FileText className="h-5 w-5 text-brand-bronze" /><h3 className="font-semibold text-brand-ink">Novo relatorio</h3></div>
-            <div className="space-y-1.5"><label className="label" htmlFor="projeto_id_relatorio">Projeto</label><select className="field" id="projeto_id_relatorio" name="projeto_id" required><option value="">Selecione</option>{projetos.map((projeto) => <option key={projeto.id} value={projeto.id}>{projeto.nome}</option>)}</select></div>
-            <div className="space-y-1.5"><label className="label" htmlFor="titulo">Titulo</label><input className="field" id="titulo" name="titulo" required /></div>
-            <div className="grid gap-4 sm:grid-cols-2"><div className="space-y-1.5"><label className="label" htmlFor="periodo_inicio">Inicio</label><input className="field" id="periodo_inicio" name="periodo_inicio" type="date" /></div><div className="space-y-1.5"><label className="label" htmlFor="periodo_fim">Fim</label><input className="field" id="periodo_fim" name="periodo_fim" type="date" /></div></div>
-            <div className="space-y-1.5"><label className="label" htmlFor="atividades_realizadas">Atividades realizadas</label><textarea className="field min-h-24" id="atividades_realizadas" name="atividades_realizadas" required /></div>
-            <div className="space-y-1.5"><label className="label" htmlFor="resultados_obtidos">Resultados obtidos</label><textarea className="field min-h-20" id="resultados_obtidos" name="resultados_obtidos" /></div>
-            <div className="space-y-1.5"><label className="label" htmlFor="pontos_atencao">Pontos de atencao</label><textarea className="field min-h-20" id="pontos_atencao" name="pontos_atencao" /></div>
-            <div className="space-y-1.5"><label className="label" htmlFor="proximos_passos">Proximos passos</label><textarea className="field min-h-20" id="proximos_passos" name="proximos_passos" /></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="projeto_id_relatorio">Projeto</label><select className="document-field" id="projeto_id_relatorio" name="projeto_id" required><option value="">Selecione</option>{projetos.map((projeto) => <option key={projeto.id} value={projeto.id}>{projeto.nome}</option>)}</select></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="titulo">Titulo</label><input className="document-field" id="titulo" name="titulo" required /></div>
+            <div className="grid gap-4 sm:grid-cols-2"><div className="space-y-1.5"><label className="label" htmlFor="periodo_inicio">Inicio</label><input className="document-field" id="periodo_inicio" name="periodo_inicio" type="date" /></div><div className="space-y-1.5"><label className="label" htmlFor="periodo_fim">Fim</label><input className="document-field" id="periodo_fim" name="periodo_fim" type="date" /></div></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="atividades_realizadas">Atividades realizadas</label><textarea className="document-field min-h-24" id="atividades_realizadas" name="atividades_realizadas" required /></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="resultados_obtidos">Resultados obtidos</label><textarea className="document-field min-h-20" id="resultados_obtidos" name="resultados_obtidos" /></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="pontos_atencao">Pontos de atencao</label><textarea className="document-field min-h-20" id="pontos_atencao" name="pontos_atencao" /></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="proximos_passos">Proximos passos</label><textarea className="document-field min-h-20" id="proximos_passos" name="proximos_passos" /></div>
             <button className="btn-primary w-full" disabled={!projetos.length} type="submit">Salvar relatorio</button>
           </form>
         </div>
@@ -61,4 +61,5 @@ export default async function RelatoriosPage() {
     </>
   )
 }
+
 
