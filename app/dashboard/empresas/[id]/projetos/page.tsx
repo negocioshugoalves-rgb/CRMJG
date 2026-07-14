@@ -26,7 +26,7 @@ export default async function ProjetosEmpresaPage({ params }: { params: { id: st
 
   return (
     <>
-      <PageHeader title={`Projetos - ${empresa.nome}`} description="Cards por projeto. Clique para abrir detalhes, editar status ou acessar relatorios." />
+      <PageHeader title={`Projetos - ${empresa.nome}`} description="Cards por projeto. Clique para abrir detalhes, editar status ou acessar relatórios." />
       <CompanyNav empresaId={empresa.id} />
 
       <div className="mb-6 flex justify-end">
@@ -64,3 +64,4 @@ export default async function ProjetosEmpresaPage({ params }: { params: { id: st
     </>
   )
 }
+

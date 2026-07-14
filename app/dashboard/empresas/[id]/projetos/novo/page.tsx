@@ -34,7 +34,7 @@ export default async function NovoProjetoEmpresaPage({ params }: { params: { id:
         <div className="space-y-1.5">
           <label className="label" htmlFor="proposta_id">Proposta aceita</label>
           <select className="document-field" id="proposta_id" name="proposta_id">
-            <option value="">Sem vinculo</option>
+            <option value="">Sem vínculo</option>
             {propostas.map((proposta) => (
               <option key={proposta.id} value={proposta.id}>{proposta.titulo}</option>
             ))}
@@ -53,7 +53,7 @@ export default async function NovoProjetoEmpresaPage({ params }: { params: { id:
 
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="space-y-1.5">
-            <label className="label" htmlFor="data_inicio">Inicio</label>
+            <label className="label" htmlFor="data_inicio">Início</label>
             <input className="document-field" id="data_inicio" name="data_inicio" type="date" />
           </div>
           <div className="space-y-1.5">
@@ -78,3 +78,4 @@ export default async function NovoProjetoEmpresaPage({ params }: { params: { id:
     </>
   )
 }
+

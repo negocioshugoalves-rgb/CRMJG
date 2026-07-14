@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { FileText, Wand2 } from 'lucide-react'
@@ -56,7 +56,7 @@ export function ProposalAutofillForm({ empresas, sources, defaultEmpresaId = '',
         </div>
         <button className="btn-secondary" type="button" onClick={preencherProposta}>
           <Wand2 className="h-4 w-4" />
-          Puxar diagnostico e plano de acao
+          Puxar diagnóstico e plano de ação
         </button>
       </div>
 
@@ -70,14 +70,14 @@ export function ProposalAutofillForm({ empresas, sources, defaultEmpresaId = '',
         </div>
       ) : null}
 
-      <div className="space-y-1.5"><label className="label" htmlFor="titulo">Titulo</label><input className="document-field" id="titulo" name="titulo" required /></div>
-      <div className="space-y-1.5"><label className="label" htmlFor="resumo_diagnostico">Resumo do diagnostico</label><textarea className="document-field min-h-56" id="resumo_diagnostico" name="resumo_diagnostico" /></div>
-      <div className="space-y-1.5"><label className="label" htmlFor="descricao">Escopo / plano de acao proposto</label><textarea className="document-field min-h-64" id="descricao" name="descricao" /></div>
-      <div className="space-y-1.5"><label className="label" htmlFor="metodologia">Metodologia</label><textarea className="document-field min-h-40" id="metodologia" name="metodologia" defaultValue="O trabalho sera conduzido com diagnostico detalhado, implantacao de ferramentas gerenciais, acompanhamento de indicadores, reunioes de validacao e relatorios periodicos de evolucao." /></div>
+      <div className="space-y-1.5"><label className="label" htmlFor="titulo">Título</label><input className="document-field" id="titulo" name="titulo" required /></div>
+      <div className="space-y-1.5"><label className="label" htmlFor="resumo_diagnostico">Resumo do diagnóstico</label><textarea className="document-field min-h-56" id="resumo_diagnostico" name="resumo_diagnostico" /></div>
+      <div className="space-y-1.5"><label className="label" htmlFor="descricao">Escopo / plano de ação proposto</label><textarea className="document-field min-h-64" id="descricao" name="descricao" /></div>
+      <div className="space-y-1.5"><label className="label" htmlFor="metodologia">Metodologia</label><textarea className="document-field min-h-40" id="metodologia" name="metodologia" defaultValue="O trabalho será conduzido com diagnóstico detalhado, implantação de ferramentas gerenciais, acompanhamento de indicadores, reuniões de validação e relatórios periódicos de evolução." /></div>
 
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="space-y-1.5"><label className="label" htmlFor="cronograma">Cronograma</label><textarea className="document-field min-h-40" id="cronograma" name="cronograma" /></div>
-        <div className="space-y-1.5"><label className="label" htmlFor="condicoes_comerciais">Condicoes comerciais</label><textarea className="document-field min-h-40" id="condicoes_comerciais" name="condicoes_comerciais" /></div>
+        <div className="space-y-1.5"><label className="label" htmlFor="condicoes_comerciais">Condições comerciais</label><textarea className="document-field min-h-40" id="condicoes_comerciais" name="condicoes_comerciais" /></div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -94,3 +94,5 @@ export function ProposalAutofillForm({ empresas, sources, defaultEmpresaId = '',
     </form>
   )
 }
+
+

@@ -41,7 +41,7 @@ export default async function NovaPropostaPage() {
 
   return (
     <>
-      <PageHeader title="Nova proposta" description="Selecione a empresa e clique no botao para puxar diagnostico e plano de acao automaticamente." />
+      <PageHeader title="Nova proposta" description="Selecione a empresa e clique no botão para puxar diagnóstico e plano de ação automaticamente." />
       <ProposalAutofillForm empresas={empresas} sources={sources} cancelHref="/dashboard/propostas" redirectTo="/dashboard/propostas" />
     </>
   )

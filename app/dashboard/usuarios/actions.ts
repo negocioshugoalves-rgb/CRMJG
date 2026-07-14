@@ -28,7 +28,7 @@ export async function createUsuario(formData: FormData) {
   const isMaster = primeiroUsuario?.id === user.id || usuarioAtual?.tipo === 'master'
 
   if (!isMaster) {
-    throw new Error('Apenas o usuario master pode cadastrar novos usuarios.')
+    throw new Error('Apenas o usuário master pode cadastrar novos usuários.')
   }
 
   const email = text(formData, 'email')
@@ -37,7 +37,7 @@ export async function createUsuario(formData: FormData) {
   const tipo = text(formData, 'tipo') || 'user'
 
   if (!email || !password || !nomeCompleto) {
-    throw new Error('Preencha nome, e-mail e senha temporaria.')
+    throw new Error('Preencha nome, e-mail e senha temporária.')
   }
 
   const admin = createAdminClient()
@@ -65,3 +65,5 @@ export async function createUsuario(formData: FormData) {
   revalidatePath('/dashboard/usuarios')
   redirect('/dashboard/usuarios')
 }
+
+

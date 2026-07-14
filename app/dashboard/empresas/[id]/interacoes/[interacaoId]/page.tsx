@@ -19,9 +19,10 @@ export default async function InteracaoDetalhePage({ params }: { params: { id: s
 
   return (
     <>
-      <PageHeader title={`${interacao.tipo} - ${empresa.nome}`} description="Detalhes da interacao registrada." />
+      <PageHeader title={`${interacao.tipo} - ${empresa.nome}`} description="Detalhes da interação registrada." />
       <CompanyNav empresaId={empresa.id} />
-      <article className="document-page space-y-6"><div className="grid gap-4 sm:grid-cols-3"><div><p className="label">Tipo</p><p className="mt-1 text-sm capitalize text-stone-700">{interacao.tipo}</p></div><div><p className="label">Data</p><p className="mt-1 text-sm text-stone-700">{new Date(interacao.data).toLocaleString('pt-BR')}</p></div><div><p className="label">Proximo follow-up</p><p className="mt-1 text-sm text-stone-700">{interacao.proximo_followup || '-'}</p></div></div><section><h3 className="font-semibold text-brand-ink">Descricao</h3><p className="mt-2 whitespace-pre-line text-sm leading-7 text-stone-700">{interacao.descricao}</p></section><Link className="btn-secondary w-fit" href={`/dashboard/empresas/${empresa.id}/interacoes`}>Voltar</Link></article>
+      <article className="document-page space-y-6"><div className="grid gap-4 sm:grid-cols-3"><div><p className="label">Tipo</p><p className="mt-1 text-sm capitalize text-stone-700">{interacao.tipo}</p></div><div><p className="label">Data</p><p className="mt-1 text-sm text-stone-700">{new Date(interacao.data).toLocaleString('pt-BR')}</p></div><div><p className="label">Próximo follow-up</p><p className="mt-1 text-sm text-stone-700">{interacao.proximo_followup || '-'}</p></div></div><section><h3 className="font-semibold text-brand-ink">Descrição</h3><p className="mt-2 whitespace-pre-line text-sm leading-7 text-stone-700">{interacao.descricao}</p></section><Link className="btn-secondary w-fit" href={`/dashboard/empresas/${empresa.id}/interacoes`}>Voltar</Link></article>
     </>
   )
 }
+

@@ -6,7 +6,7 @@ export function createAdminClient() {
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
   if (!serviceRoleKey) {
-    throw new Error('Configure SUPABASE_SERVICE_ROLE_KEY para cadastrar usuarios pelo CRM.')
+    throw new Error('Configure SUPABASE_SERVICE_ROLE_KEY para cadastrar usuários pelo CRM.')
   }
 
   return createClient(supabaseUrl, serviceRoleKey, {
@@ -16,3 +16,4 @@ export function createAdminClient() {
     },
   })
 }
+

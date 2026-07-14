@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
   ArrowRight,
@@ -19,37 +19,37 @@ export const dynamic = 'force-dynamic'
 const sections = [
   {
     href: 'diagnostico',
-    title: 'Diagnostico',
-    description: 'Analise das areas da empresa, problemas e recomendacoes.',
+    title: 'Diagnóstico',
+    description: 'Análise das áreas da empresa, problemas e recomendações.',
     icon: ClipboardList,
   },
   {
     href: 'plano-acao',
-    title: 'Plano de acao',
+    title: 'Plano de ação',
     description: 'Acoes propostas, prioridades, prazos e resultados esperados.',
     icon: ListChecks,
   },
   {
     href: 'propostas',
     title: 'Propostas',
-    description: 'Documentos comerciais e versao pronta para salvar em PDF.',
+    description: 'Documentos comerciais e versão pronta para salvar em PDF.',
     icon: FileText,
   },
   {
     href: 'projetos',
     title: 'Projetos',
-    description: 'Trabalhos aceitos e em execucao para esta empresa.',
+    description: 'Trabalhos aceitos e em execução para esta empresa.',
     icon: Briefcase,
   },
   {
     href: 'interacoes',
-    title: 'Interacoes',
+    title: 'Interações',
     description: 'Historico de contatos, reunioes e follow-ups.',
     icon: MessageSquare,
   },
   {
     href: '/dashboard/relatorios',
-    title: 'Relatorios',
+    title: 'Relatórios',
     description: 'Acompanhamento dos projetos com indicadores.',
     icon: BarChart3,
     absolute: true,
@@ -82,11 +82,11 @@ export default async function EmpresaDetalhePage({ params }: { params: { id: str
   ])
 
   const counters = [
-    { label: 'Diagnosticos', value: diagnosticos },
+    { label: 'Diagnósticos', value: diagnosticos },
     { label: 'Acoes', value: planos },
     { label: 'Propostas', value: propostas },
     { label: 'Projetos', value: projetos },
-    { label: 'Interacoes', value: interacoes },
+    { label: 'Interações', value: interacoes },
   ]
 
   return (
@@ -150,3 +150,5 @@ export default async function EmpresaDetalhePage({ params }: { params: { id: str
     </>
   )
 }
+
+

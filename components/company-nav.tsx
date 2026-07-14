@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import {
   Briefcase,
   Building2,
@@ -10,11 +10,11 @@ import {
 
 const tabs = [
   { href: '', label: 'Resumo', icon: Building2 },
-  { href: 'diagnostico', label: 'Diagnostico', icon: ClipboardList },
-  { href: 'plano-acao', label: 'Plano de acao', icon: ListChecks },
+  { href: 'diagnostico', label: 'Diagnóstico', icon: ClipboardList },
+  { href: 'plano-acao', label: 'Plano de ação', icon: ListChecks },
   { href: 'propostas', label: 'Propostas', icon: FileText },
   { href: 'projetos', label: 'Projetos', icon: Briefcase },
-  { href: 'interacoes', label: 'Interacoes', icon: MessageSquare },
+  { href: 'interacoes', label: 'Interações', icon: MessageSquare },
 ]
 
 export function CompanyNav({ empresaId }: { empresaId: string }) {
@@ -40,3 +40,5 @@ export function CompanyNav({ empresaId }: { empresaId: string }) {
     </nav>
   )
 }
+
+

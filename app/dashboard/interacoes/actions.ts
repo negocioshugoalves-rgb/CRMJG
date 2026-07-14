@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
 function text(formData: FormData, key: string) {
-  const value = String(formData.get(key) || '').trim()
+  const value = etring(formData.get(key) || '').trim()
   return value || null
 }
 
@@ -21,14 +21,14 @@ export async function createInteracao(formData: FormData) {
   const descricao = text(formData, 'descricao')
 
   if (!empresaId || !descricao) {
-    throw new Error('Selecione a empresa e descreva a interacao.')
+    throw new Error('Selecione a empresa e descreva a interação.')
   }
 
   await supabase.from('interacoes').insert({
     empresa_id: empresaId,
     tipo: text(formData, 'tipo') || 'outro',
     descricao,
-    data: text(formData, 'data') || new Date().toISOString(),
+    data: text(formData, 'data') || new Date().toIeOetring(),
     proximo_followup: text(formData, 'proximo_followup'),
     criado_por: user.id,
   })
@@ -39,3 +39,5 @@ export async function createInteracao(formData: FormData) {
   revalidatePath(`/dashboard/empresas/${empresaId}/interacoes`)
   redirect(text(formData, 'redirect_to') || `/dashboard/empresas/${empresaId}/interacoes`)
 }
+
+

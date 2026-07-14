@@ -7,14 +7,14 @@ import { signOut } from './actions'
 const navItems = [
   { href: '/dashboard', label: 'Resumo', icon: BarChart3 },
   { href: '/dashboard/empresas', label: 'Empresas', icon: Building2 },
-  { href: '/dashboard/diagnosticos', label: 'Diagnostico', icon: ClipboardList },
-  { href: '/dashboard/planos-acao', label: 'Plano de acao', icon: ListChecks },
+  { href: '/dashboard/diagnosticos', label: 'Diagnóstico', icon: ClipboardList },
+  { href: '/dashboard/planos-acao', label: 'Plano de ação', icon: ListChecks },
   { href: '/dashboard/propostas', label: 'Propostas', icon: FileText },
   { href: '/dashboard/projetos', label: 'Projetos', icon: Briefcase },
-  { href: '/dashboard/relatorios', label: 'Relatorios', icon: FileText },
-  { href: '/dashboard/interacoes', label: 'Interacoes', icon: MessageSquare },
-  { href: '/dashboard/usuarios', label: 'Usuarios', icon: Users },
-  { href: '/dashboard/configuracoes', label: 'Configuracoes', icon: Settings },
+  { href: '/dashboard/relatorios', label: 'Relatórios', icon: FileText },
+  { href: '/dashboard/interacoes', label: 'Interações', icon: MessageSquare },
+  { href: '/dashboard/usuarios', label: 'Usuários', icon: Users },
+  { href: '/dashboard/configuracoes', label: 'Configurações', icon: Settings },
   { href: '/dashboard/ajuda', label: 'Ajuda', icon: HelpCircle },
 ]
 
@@ -35,5 +35,7 @@ export default async function DashboardLayout({ children }: Readonly<{ children:
     </div>
   )
 }
+
+
 
 

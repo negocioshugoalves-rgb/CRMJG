@@ -21,7 +21,7 @@ export default async function EmpresasPage() {
     <>
       <PageHeader
         title="Empresas"
-        description="Cadastre clientes e prospects. Depois abra o dossie da empresa para trabalhar diagnostico, plano, propostas e execucao em um unico contexto."
+        description="Cadastre clientes e prospects. Depois abra o dossiê da empresa para trabalhar diagnóstico, plano, propostas e execução em um único contexto."
       />
 
       <div className="mb-6 flex justify-end">
@@ -62,3 +62,5 @@ export default async function EmpresasPage() {
     </>
   )
 }
+
+

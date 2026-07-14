@@ -41,7 +41,7 @@ export default async function NovaPropostaPage({ params }: { params: { id: strin
 
   return (
     <>
-      <PageHeader title={`Nova proposta - ${empresa.nome}`} description="Clique no botao para puxar automaticamente diagnostico e plano de acao desta empresa." />
+      <PageHeader title={`Nova proposta - ${empresa.nome}`} description="Clique no botão para puxar automaticamente diagnóstico e plano de ação desta empresa." />
       <CompanyNav empresaId={empresa.id} />
       <ProposalAutofillForm empresas={[{ id: empresa.id, nome: empresa.nome }]} sources={sources} defaultEmpresaId={empresa.id} cancelHref={`/dashboard/empresas/${empresa.id}/propostas`} redirectTo={`/dashboard/empresas/${empresa.id}/propostas`} />
     </>

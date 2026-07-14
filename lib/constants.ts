@@ -1,26 +1,26 @@
 ﻿import type { SetorDiagnostico, StatusFunil, StatusProposta } from '@/lib/types'
 
 export const STATUS_FUNIL_LABELS: Record<StatusFunil, string> = {
-  prospeccao: 'Prospeccao',
-  diagnostico: 'Diagnostico',
+  prospeccao: 'Prospecção',
+  diagnostico: 'Diagnóstico',
   proposta: 'Proposta',
   fechado_ganho: 'Fechado ganho',
   fechado_perdido: 'Fechado perdido',
 }
 
 export const STATUS_PROPOSTA_LABELS: Record<StatusProposta, string> = {
-  em_elaboracao: 'Em elaboracao',
+  em_elaboracao: 'Em elaboração',
   enviada: 'Enviada',
-  em_negociacao: 'Em negociacao',
+  em_negociacao: 'Em negociação',
   aceita: 'Aceita',
   recusada: 'Recusada',
 }
 
 export const SETOR_LABELS: Record<SetorDiagnostico, string> = {
-  comunicacao: 'Comunicacao',
+  comunicacao: 'Comunicação',
   financeiro: 'Financeiro',
   administrativo_rh: 'Administrativo / RH',
-  lideranca: 'Lideranca',
+  lideranca: 'Liderança',
   processos: 'Processos',
   marketing: 'Marketing',
   operacional: 'Operacional',
@@ -34,22 +34,21 @@ export const STATUS_FUNIL = Object.keys(STATUS_FUNIL_LABELS) as StatusFunil[]
 
 export const PRIORIDADE_LABELS = {
   baixa: 'Baixa',
-  media: 'Media',
+  media: 'Média',
   alta: 'Alta',
-  critica: 'Critica',
+  critica: 'Crítica',
 } as const
 
 export const STATUS_ACAO_LABELS = {
   planejada: 'Planejada',
   em_andamento: 'Em andamento',
-  concluida: 'Concluida',
+  concluida: 'Concluída',
   pausada: 'Pausada',
 } as const
 
 export const STATUS_PROJETO_LABELS = {
   ativo: 'Ativo',
   pausado: 'Pausado',
-  concluido: 'Concluido',
+  concluido: 'Concluído',
   cancelado: 'Cancelado',
 } as const
-
