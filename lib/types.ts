@@ -86,6 +86,11 @@ export interface Proposta {
   cronograma: string | null
   condicoes_comerciais: string | null
   valor: number | null
+  tipo_investimento: string | null
+  periodo_tipo: string | null
+  periodo_descricao: string | null
+  periodo_inicio: string | null
+  periodo_fim: string | null
   status: StatusProposta
   data_envio: string | null
   data_validade: string | null

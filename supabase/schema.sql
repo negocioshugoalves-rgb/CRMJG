@@ -176,8 +176,8 @@ create table if not exists public.interacoes (
 );
 
 
--- Compatibilidade para bancos criados com versões anteriores do CRM.
--- O "create table if not exists" não adiciona colunas novas em tabelas já existentes.
+-- Compatibilidade para bancos criados com versÃµes anteriores do CRM.
+-- O "create table if not exists" nÃ£o adiciona colunas novas em tabelas jÃ¡ existentes.
 alter type status_funil add value if not exists 'prospeccao';
 alter type status_funil add value if not exists 'diagnostico';
 alter type status_funil add value if not exists 'proposta';
@@ -257,6 +257,11 @@ alter table public.propostas add column if not exists metodologia text;
 alter table public.propostas add column if not exists cronograma text;
 alter table public.propostas add column if not exists condicoes_comerciais text;
 alter table public.propostas add column if not exists valor numeric(12, 2);
+alter table public.propostas add column if not exists tipo_investimento text not null default 'por_projeto';
+alter table public.propostas add column if not exists periodo_tipo text not null default 'determinado';
+alter table public.propostas add column if not exists periodo_descricao text;
+alter table public.propostas add column if not exists periodo_inicio date;
+alter table public.propostas add column if not exists periodo_fim date;
 alter table public.propostas add column if not exists status status_proposta not null default 'em_elaboracao';
 alter table public.propostas add column if not exists data_envio date;
 alter table public.propostas add column if not exists data_validade date;

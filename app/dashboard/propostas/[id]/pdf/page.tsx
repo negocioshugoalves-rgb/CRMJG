@@ -30,6 +30,17 @@ function safeColor(value: string | null | undefined, fallback: string) {
   return value && /^#[0-9a-fA-F]{6}$/.test(value) ? value : fallback
 }
 
+function tipoInvestimentoLabel(value: string | null | undefined) {
+  return value === 'mensal' ? 'Mensal' : 'Por projeto'
+}
+
+function periodoProjetoLabel(proposta: Proposta) {
+  if (proposta.periodo_tipo === 'indeterminado') return 'Indeterminado'
+  const inicio = formatDate(proposta.periodo_inicio)
+  const fim = formatDate(proposta.periodo_fim)
+  if (inicio === 'A definir' && fim === 'A definir') return 'A definir'
+  return `${inicio} até ${fim}`
+}
 function SectionTitle({ number, title, colors }: { number: string; title: string; colors: CoresProposta }) {
   return (
     <div className="mb-5 flex items-center gap-3">
@@ -107,20 +118,20 @@ export default async function PropostaPdfPage({ params }: { params: { id: string
 
           <div className="relative mt-auto grid gap-4 text-sm sm:grid-cols-3">
             <div className="border-t border-white/25 pt-4"><p className="text-white/65">Cliente</p><p className="mt-1 font-semibold">{cliente?.nome || '-'}</p></div>
-            <div className="border-t border-white/25 pt-4"><p className="text-white/65">Investimento</p><p className="mt-1 font-semibold">{money(proposta.valor)}</p></div>
+            <div className="border-t border-white/25 pt-4"><p className="text-white/65">Investimento</p><p className="mt-1 font-semibold">{money(proposta.valor)} / {tipoInvestimentoLabel(proposta.tipo_investimento)}</p></div>
             <div className="border-t border-white/25 pt-4"><p className="text-white/65">Validade</p><p className="mt-1 font-semibold">{formatDate(proposta.data_validade)}</p></div>
           </div>
         </section>
 
         <section className="page-break grid gap-6 border-b border-stone-200 px-10 py-8 md:grid-cols-2">
           <div>
-            <h2 className="text-sm font-bold uppercase tracking-wide" style={{ color: colors.secundaria }}>Consultoria responsável</h2>
+            <h2 className="text-sm font-bold uppercase tracking-wide" style={{ color: colors.secundaria }}>Consultoria responsÃƒÂ¡vel</h2>
             <p className="mt-3 text-xl font-bold" style={{ color: colors.primaria }}>{consultoriaNome}</p>
             {config?.razao_social ? <p className="mt-1 text-sm text-stone-600">{config.razao_social}</p> : null}
             {config?.endereco ? <p className="mt-3 text-sm leading-6 text-stone-700">{config.endereco}</p> : null}
             {config?.cidade_estado ? <p className="text-sm leading-6 text-stone-700">{config.cidade_estado}</p> : null}
             {contatoConsultoria(config) ? <p className="mt-3 text-sm leading-6 text-stone-700">{contatoConsultoria(config)}</p> : null}
-            {config?.responsavel ? <p className="mt-3 text-sm leading-6 text-stone-700"><strong>Responsável:</strong> {config.responsavel}{config.cargo_responsavel ? `, ${config.cargo_responsavel}` : ''}</p> : null}
+            {config?.responsavel ? <p className="mt-3 text-sm leading-6 text-stone-700"><strong>ResponsÃƒÂ¡vel:</strong> {config.responsavel}{config.cargo_responsavel ? `, ${config.cargo_responsavel}` : ''}</p> : null}
           </div>
 
           <div>
@@ -134,14 +145,14 @@ export default async function PropostaPdfPage({ params }: { params: { id: string
               <p><strong>E-mail:</strong> {cliente?.contato_email || '-'}</p>
               <p><strong>Telefone:</strong> {cliente?.contato_telefone || '-'}</p>
               <p><strong>Origem:</strong> {cliente?.origem_prospeccao || '-'}</p>
-              {cliente?.observacoes ? <p><strong>Observações:</strong> {cliente.observacoes}</p> : null}
+              {cliente?.observacoes ? <p><strong>ObservaÃƒÂ§ÃƒÂµes:</strong> {cliente.observacoes}</p> : null}
             </div>
           </div>
         </section>
 
         {config?.descricao ? (
           <section className="px-10 py-8">
-            <SectionTitle number="0" title="Apresentação da consultoria" colors={colors} />
+            <SectionTitle number="0" title="ApresentaÃƒÂ§ÃƒÂ£o da consultoria" colors={colors} />
             <p className="whitespace-pre-line text-sm leading-7 text-stone-700">{config.descricao}</p>
           </section>
         ) : null}
@@ -152,7 +163,7 @@ export default async function PropostaPdfPage({ params }: { params: { id: string
         </section>
 
         <section className="px-10 py-8">
-          <SectionTitle number="2" title="Diagnóstico por área" colors={colors} />
+          <SectionTitle number="2" title="DiagnÃƒÂ³stico por ÃƒÂ¡rea" colors={colors} />
           <div className="grid gap-4">
             {diagnosticos.length ? diagnosticos.map((diagnostico) => (
               <div className="avoid-break rounded-md border border-stone-200 p-5" key={diagnostico.id}>
@@ -160,19 +171,19 @@ export default async function PropostaPdfPage({ params }: { params: { id: string
                   <h3 className="font-semibold" style={{ color: colors.primaria }}>{SETOR_LABELS[diagnostico.setor]}</h3>
                   <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ backgroundColor: `${colors.destaque}33`, color: colors.secundaria }}>Prioridade {diagnostico.prioridade}</span>
                 </div>
-                {diagnostico.situacao_atual ? <p className="mt-3 text-sm leading-6 text-stone-700"><strong>Situação atual:</strong> {diagnostico.situacao_atual}</p> : null}
+                {diagnostico.situacao_atual ? <p className="mt-3 text-sm leading-6 text-stone-700"><strong>SituaÃƒÂ§ÃƒÂ£o atual:</strong> {diagnostico.situacao_atual}</p> : null}
                 {diagnostico.problemas_identificados ? <p className="mt-2 text-sm leading-6 text-stone-700"><strong>Problemas identificados:</strong> {diagnostico.problemas_identificados}</p> : null}
                 <p className="mt-2 text-sm leading-6 text-stone-700"><strong>Parecer consultivo:</strong> {diagnostico.parecer}</p>
                 {diagnostico.pontos_fortes ? <p className="mt-2 text-sm leading-6 text-stone-700"><strong>Pontos fortes:</strong> {diagnostico.pontos_fortes}</p> : null}
                 {diagnostico.pontos_fracos ? <p className="mt-2 text-sm leading-6 text-stone-700"><strong>Pontos fracos:</strong> {diagnostico.pontos_fracos}</p> : null}
-                {diagnostico.recomendacoes ? <p className="mt-2 text-sm leading-6 text-stone-700"><strong>Recomendações:</strong> {diagnostico.recomendacoes}</p> : null}
+                {diagnostico.recomendacoes ? <p className="mt-2 text-sm leading-6 text-stone-700"><strong>RecomendaÃƒÂ§ÃƒÂµes:</strong> {diagnostico.recomendacoes}</p> : null}
               </div>
-            )) : <p className="text-sm text-stone-600">Nenhum diagnóstico vinculado ainda.</p>}
+            )) : <p className="text-sm text-stone-600">Nenhum diagnÃƒÂ³stico vinculado ainda.</p>}
           </div>
         </section>
 
         <section className="px-10 py-8">
-          <SectionTitle number="3" title="Escopo e plano de ação" colors={colors} />
+          <SectionTitle number="3" title="Escopo e plano de aÃƒÂ§ÃƒÂ£o" colors={colors} />
           {proposta.descricao ? <p className="mb-5 whitespace-pre-line text-sm leading-7 text-stone-700">{proposta.descricao}</p> : null}
           <div className="grid gap-4">
             {planos.length ? planos.map((plano) => (
@@ -181,12 +192,12 @@ export default async function PropostaPdfPage({ params }: { params: { id: string
                   <h3 className="font-semibold" style={{ color: colors.primaria }}>{plano.ordem}. {plano.titulo}</h3>
                   <span className="text-xs font-semibold" style={{ color: colors.secundaria }}>{STATUS_ACAO_LABELS[plano.status]}</span>
                 </div>
-                <p className="mt-2 text-sm leading-6 text-stone-700"><strong>O que será feito:</strong> {plano.descricao}</p>
+                <p className="mt-2 text-sm leading-6 text-stone-700"><strong>O que serÃƒÂ¡ feito:</strong> {plano.descricao}</p>
                 {plano.justificativa ? <p className="mt-2 text-sm leading-6 text-stone-700"><strong>Justificativa:</strong> {plano.justificativa}</p> : null}
                 {plano.resultado_esperado ? <p className="mt-2 text-sm leading-6 text-stone-700"><strong>Resultado esperado:</strong> {plano.resultado_esperado}</p> : null}
-                <p className="mt-3 text-sm text-stone-600">Área: {SETOR_LABELS[plano.setor]} | Prioridade: {plano.prioridade} | Responsável: {plano.responsavel || 'A definir'} | Prazo: {formatDate(plano.prazo)}</p>
+                <p className="mt-3 text-sm text-stone-600">ÃƒÂrea: {SETOR_LABELS[plano.setor]} | Prioridade: {plano.prioridade} | ResponsÃƒÂ¡vel: {plano.responsavel || 'A definir'} | Prazo: {formatDate(plano.prazo)}</p>
               </div>
-            )) : <p className="text-sm text-stone-600">Nenhuma ação planejada ainda.</p>}
+            )) : <p className="text-sm text-stone-600">Nenhuma aÃƒÂ§ÃƒÂ£o planejada ainda.</p>}
           </div>
         </section>
 
@@ -202,9 +213,9 @@ export default async function PropostaPdfPage({ params }: { params: { id: string
         </section>
 
         <section className="mx-10 my-8 rounded-md border p-6" style={{ backgroundColor: `${colors.destaque}22`, borderColor: colors.destaque }}>
-          <SectionTitle number="6" title="Investimento e condições comerciais" colors={colors} />
-          <p className="text-3xl font-bold" style={{ color: colors.primaria }}>{money(proposta.valor)}</p>
-          <p className="mt-3 whitespace-pre-line text-sm leading-7 text-stone-700">{proposta.condicoes_comerciais || 'Condições comerciais a definir.'}</p>
+          <SectionTitle number="6" title="Investimento e condiÃƒÂ§ÃƒÂµes comerciais" colors={colors} />
+          <p className="text-3xl font-bold" style={{ color: colors.primaria }}>{money(proposta.valor)}</p><p className="mt-1 text-sm font-semibold text-stone-700">Investimento {tipoInvestimentoLabel(proposta.tipo_investimento).toLowerCase()}</p>
+          <p className="mt-3 whitespace-pre-line text-sm leading-7 text-stone-700">{proposta.condicoes_comerciais || 'CondiÃƒÂ§ÃƒÂµes comerciais a definir.'}</p>
           <div className="mt-5 grid gap-3 text-sm text-stone-700 sm:grid-cols-2">
             <p><strong>Data de envio:</strong> {formatDate(proposta.data_envio)}</p>
             <p><strong>Validade:</strong> {formatDate(proposta.data_validade)}</p>
@@ -215,7 +226,7 @@ export default async function PropostaPdfPage({ params }: { params: { id: string
           <div>
             <div className="mt-12 border-t border-stone-400 pt-3 text-sm text-stone-700">
               <p className="font-semibold" style={{ color: colors.primaria }}>{consultoriaNome}</p>
-              <p>{config?.responsavel || 'Responsável pela proposta'}</p>
+              <p>{config?.responsavel || 'ResponsÃƒÂ¡vel pela proposta'}</p>
             </div>
           </div>
           <div>

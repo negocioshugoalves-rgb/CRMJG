@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import Link from 'next/link'
 import { FileText, Wand2 } from 'lucide-react'
@@ -82,10 +82,19 @@ export function ProposalAutofillForm({ empresas, sources, defaultEmpresaId = '',
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-1.5"><label className="label" htmlFor="valor">Investimento</label><input className="document-field" id="valor" name="valor" type="number" step="0.01" /></div>
+        <div className="space-y-1.5"><label className="label" htmlFor="tipo_investimento">Tipo de investimento</label><select className="document-field" id="tipo_investimento" name="tipo_investimento" defaultValue="por_projeto"><option value="por_projeto">Por projeto</option><option value="mensal">Mensal</option></select></div>
         <div className="space-y-1.5"><label className="label" htmlFor="status">Status</label><select className="document-field" id="status" name="status">{statusProposta.map((status) => <option key={status} value={status}>{STATUS_PROPOSTA_LABELS[status]}</option>)}</select></div>
-        <div className="space-y-1.5"><label className="label" htmlFor="data_envio">Envio</label><input className="document-field" id="data_envio" name="data_envio" type="date" /></div>
         <div className="space-y-1.5"><label className="label" htmlFor="data_validade">Validade</label><input className="document-field" id="data_validade" name="data_validade" type="date" /></div>
       </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="space-y-1.5"><label className="label" htmlFor="periodo_tipo">Período do projeto</label><select className="document-field" id="periodo_tipo" name="periodo_tipo" defaultValue="determinado"><option value="determinado">Determinado</option><option value="indeterminado">Indeterminado</option></select></div>
+        <div className="space-y-1.5"><label className="label" htmlFor="periodo_inicio">Início previsto</label><input className="document-field" id="periodo_inicio" name="periodo_inicio" type="date" /></div>
+        <div className="space-y-1.5"><label className="label" htmlFor="periodo_fim">Término previsto</label><input className="document-field" id="periodo_fim" name="periodo_fim" type="date" /></div>
+        <div className="space-y-1.5"><label className="label" htmlFor="data_envio">Envio</label><input className="document-field" id="data_envio" name="data_envio" type="date" /></div>
+      </div>
+
+      <div className="space-y-1.5"><label className="label" htmlFor="periodo_descricao">Observações sobre período</label><input className="document-field" id="periodo_descricao" name="periodo_descricao" placeholder="Ex.: contrato inicial de 6 meses, renovável por acordo entre as partes" /></div>
 
       <div className="flex flex-col gap-3 sm:flex-row">
         <button className="btn-primary" disabled={!empresas.length} type="submit">Salvar proposta</button>
@@ -94,5 +103,3 @@ export function ProposalAutofillForm({ empresas, sources, defaultEmpresaId = '',
     </form>
   )
 }
-
-
