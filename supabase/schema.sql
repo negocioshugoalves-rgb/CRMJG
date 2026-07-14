@@ -175,6 +175,119 @@ create table if not exists public.interacoes (
   criado_em timestamptz not null default now()
 );
 
+
+-- Compatibilidade para bancos criados com versões anteriores do CRM.
+-- O "create table if not exists" não adiciona colunas novas em tabelas já existentes.
+alter type status_funil add value if not exists 'prospeccao';
+alter type status_funil add value if not exists 'diagnostico';
+alter type status_funil add value if not exists 'proposta';
+alter type status_funil add value if not exists 'fechado_ganho';
+alter type status_funil add value if not exists 'fechado_perdido';
+alter type setor_diagnostico add value if not exists 'comunicacao';
+alter type setor_diagnostico add value if not exists 'financeiro';
+alter type setor_diagnostico add value if not exists 'administrativo_rh';
+alter type setor_diagnostico add value if not exists 'lideranca';
+alter type setor_diagnostico add value if not exists 'processos';
+alter type setor_diagnostico add value if not exists 'marketing';
+alter type setor_diagnostico add value if not exists 'operacional';
+alter type setor_diagnostico add value if not exists 'imagem_pessoal';
+alter type setor_diagnostico add value if not exists 'comercial';
+alter type setor_diagnostico add value if not exists 'qualidade';
+alter type prioridade add value if not exists 'baixa';
+alter type prioridade add value if not exists 'media';
+alter type prioridade add value if not exists 'alta';
+alter type prioridade add value if not exists 'critica';
+alter type status_acao add value if not exists 'planejada';
+alter type status_acao add value if not exists 'em_andamento';
+alter type status_acao add value if not exists 'concluida';
+alter type status_acao add value if not exists 'pausada';
+alter type status_proposta add value if not exists 'em_elaboracao';
+alter type status_proposta add value if not exists 'enviada';
+alter type status_proposta add value if not exists 'em_negociacao';
+alter type status_proposta add value if not exists 'aceita';
+alter type status_proposta add value if not exists 'recusada';
+alter type status_projeto add value if not exists 'ativo';
+alter type status_projeto add value if not exists 'pausado';
+alter type status_projeto add value if not exists 'concluido';
+alter type status_projeto add value if not exists 'cancelado';
+
+alter table public.usuarios add column if not exists email text;
+alter table public.usuarios add column if not exists nome_completo text;
+alter table public.usuarios add column if not exists tipo text not null default 'user';
+alter table public.usuarios add column if not exists ativo boolean not null default true;
+alter table public.usuarios add column if not exists criado_em timestamptz not null default now();
+alter table public.usuarios add column if not exists atualizado_em timestamptz not null default now();
+
+alter table public.empresas add column if not exists porte text;
+alter table public.empresas add column if not exists contato_telefone text;
+alter table public.empresas add column if not exists contato_email text;
+alter table public.empresas add column if not exists origem_prospeccao text;
+alter table public.empresas add column if not exists status_funil status_funil not null default 'prospeccao';
+alter table public.empresas add column if not exists observacoes text;
+alter table public.empresas add column if not exists criado_por uuid references auth.users(id);
+alter table public.empresas add column if not exists atualizado_em timestamptz not null default now();
+
+alter table public.diagnosticos add column if not exists situacao_atual text;
+alter table public.diagnosticos add column if not exists problemas_identificados text;
+alter table public.diagnosticos add column if not exists pontos_fortes text;
+alter table public.diagnosticos add column if not exists pontos_fracos text;
+alter table public.diagnosticos add column if not exists recomendacoes text;
+alter table public.diagnosticos add column if not exists prioridade prioridade not null default 'media';
+alter table public.diagnosticos add column if not exists avaliado_em timestamptz not null default now();
+alter table public.diagnosticos add column if not exists avaliado_por uuid references auth.users(id);
+alter table public.diagnosticos add column if not exists atualizado_em timestamptz not null default now();
+
+alter table public.planos_acao add column if not exists diagnostico_id uuid references public.diagnosticos(id) on delete set null;
+alter table public.planos_acao add column if not exists justificativa text;
+alter table public.planos_acao add column if not exists responsavel text;
+alter table public.planos_acao add column if not exists prazo date;
+alter table public.planos_acao add column if not exists prioridade prioridade not null default 'media';
+alter table public.planos_acao add column if not exists status status_acao not null default 'planejada';
+alter table public.planos_acao add column if not exists resultado_esperado text;
+alter table public.planos_acao add column if not exists ordem integer not null default 1;
+alter table public.planos_acao add column if not exists criado_por uuid references auth.users(id);
+alter table public.planos_acao add column if not exists atualizado_em timestamptz not null default now();
+
+alter table public.propostas add column if not exists resumo_diagnostico text;
+alter table public.propostas add column if not exists metodologia text;
+alter table public.propostas add column if not exists cronograma text;
+alter table public.propostas add column if not exists condicoes_comerciais text;
+alter table public.propostas add column if not exists valor numeric(12, 2);
+alter table public.propostas add column if not exists status status_proposta not null default 'em_elaboracao';
+alter table public.propostas add column if not exists data_envio date;
+alter table public.propostas add column if not exists data_validade date;
+alter table public.propostas add column if not exists criado_por uuid references auth.users(id);
+alter table public.propostas add column if not exists atualizado_em timestamptz not null default now();
+
+alter table public.projetos add column if not exists proposta_id uuid references public.propostas(id) on delete set null;
+alter table public.projetos add column if not exists objetivo text;
+alter table public.projetos add column if not exists status status_projeto not null default 'ativo';
+alter table public.projetos add column if not exists data_inicio date;
+alter table public.projetos add column if not exists data_fim_prevista date;
+alter table public.projetos add column if not exists criado_por uuid references auth.users(id);
+alter table public.projetos add column if not exists atualizado_em timestamptz not null default now();
+
+alter table public.indicadores add column if not exists area setor_diagnostico;
+alter table public.indicadores add column if not exists valor_inicial numeric(12, 2);
+alter table public.indicadores add column if not exists meta numeric(12, 2);
+alter table public.indicadores add column if not exists valor_atual numeric(12, 2);
+alter table public.indicadores add column if not exists unidade text;
+alter table public.indicadores add column if not exists criado_por uuid references auth.users(id);
+alter table public.indicadores add column if not exists atualizado_em timestamptz not null default now();
+
+alter table public.relatorios add column if not exists periodo_inicio date;
+alter table public.relatorios add column if not exists periodo_fim date;
+alter table public.relatorios add column if not exists resultados_obtidos text;
+alter table public.relatorios add column if not exists pontos_atencao text;
+alter table public.relatorios add column if not exists proximos_passos text;
+alter table public.relatorios add column if not exists criado_por uuid references auth.users(id);
+alter table public.relatorios add column if not exists atualizado_em timestamptz not null default now();
+
+alter table public.interacoes add column if not exists tipo text not null default 'outro';
+alter table public.interacoes add column if not exists data timestamptz not null default now();
+alter table public.interacoes add column if not exists proximo_followup date;
+alter table public.interacoes add column if not exists criado_por uuid references auth.users(id);
+
 create or replace function public.set_updated_at()
 returns trigger language plpgsql as $$
 begin
@@ -283,6 +396,7 @@ create policy "Usuarios autenticados criam relatorios" on public.relatorios for 
 
 drop policy if exists "Usuarios autenticados criam interacoes" on public.interacoes;
 create policy "Usuarios autenticados criam interacoes" on public.interacoes for insert to authenticated with check (auth.uid() = criado_por);
+
 
 
 
