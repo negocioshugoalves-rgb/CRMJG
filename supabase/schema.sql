@@ -1,4 +1,4 @@
-﻿create extension if not exists "pgcrypto";
+create extension if not exists "pgcrypto";
 
 do $$
 begin
@@ -210,6 +210,10 @@ alter type status_projeto add value if not exists 'ativo';
 alter type status_projeto add value if not exists 'pausado';
 alter type status_projeto add value if not exists 'concluido';
 alter type status_projeto add value if not exists 'cancelado';
+
+alter table public.configuracoes_empresa add column if not exists cor_primaria text not null default '#1f2933';
+alter table public.configuracoes_empresa add column if not exists cor_secundaria text not null default '#9a6a2f';
+alter table public.configuracoes_empresa add column if not exists cor_destaque text not null default '#d9b46c';
 
 alter table public.usuarios add column if not exists email text;
 alter table public.usuarios add column if not exists nome_completo text;

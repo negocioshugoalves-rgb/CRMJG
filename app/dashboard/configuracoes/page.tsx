@@ -1,4 +1,4 @@
-﻿import { PageHeader } from '@/components/page-header'
+import { PageHeader } from '@/components/page-header'
 import { createClient } from '@/lib/supabase/server'
 import { salvarConfiguracaoEmpresa } from './actions'
 
@@ -17,6 +17,9 @@ type ConfiguracaoEmpresa = {
   cargo_responsavel: string | null
   logo_url: string | null
   descricao: string | null
+  cor_primaria: string | null
+  cor_secundaria: string | null
+  cor_destaque: string | null
 }
 
 export default async function ConfiguracoesPage() {
@@ -33,7 +36,7 @@ export default async function ConfiguracoesPage() {
     <>
       <PageHeader
         title="Configurações"
-        description="Cadastre os dados da empresa consultora que aparecerão nas propostas comerciais em PDF."
+        description="Cadastre os dados da empresa consultora e personalize as cores das propostas comerciais em PDF."
       />
 
       <form action={salvarConfiguracaoEmpresa} className="document-page space-y-6">
@@ -63,10 +66,18 @@ export default async function ConfiguracoesPage() {
           <textarea className="document-field min-h-36" id="descricao" name="descricao" defaultValue={config.descricao ?? ''} />
         </div>
 
+        <section className="rounded-md border border-stone-200 bg-stone-50 p-4">
+          <h3 className="text-lg font-semibold text-brand-ink">Cores da proposta</h3>
+          <p className="mt-1 text-sm leading-6 text-stone-600">Essas cores serão usadas na capa, títulos, destaques e blocos comerciais do PDF.</p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+            <div className="space-y-1.5"><label className="label" htmlFor="cor_primaria">Cor principal</label><input className="h-12 w-full rounded-md border border-stone-300 bg-white p-1" id="cor_primaria" name="cor_primaria" type="color" defaultValue={config.cor_primaria ?? '#1f2933'} /></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="cor_secundaria">Cor secundária</label><input className="h-12 w-full rounded-md border border-stone-300 bg-white p-1" id="cor_secundaria" name="cor_secundaria" type="color" defaultValue={config.cor_secundaria ?? '#9a6a2f'} /></div>
+            <div className="space-y-1.5"><label className="label" htmlFor="cor_destaque">Cor de destaque</label><input className="h-12 w-full rounded-md border border-stone-300 bg-white p-1" id="cor_destaque" name="cor_destaque" type="color" defaultValue={config.cor_destaque ?? '#d9b46c'} /></div>
+          </div>
+        </section>
+
         <button className="btn-primary" type="submit">Salvar configurações</button>
       </form>
     </>
   )
 }
-
-

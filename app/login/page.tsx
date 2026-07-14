@@ -1,4 +1,4 @@
-﻿import { Suspense } from 'react'
+import { Suspense } from 'react'
 import { LoginForm } from '@/components/login-form'
 
 export default function LoginPage() {
@@ -8,14 +8,14 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           <div className="mb-8">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-brand-bronze">
-              JG Represent
+              CRM Consultivo
             </p>
             <h1 className="mt-3 text-4xl font-bold text-brand-ink">
-              CRM Conecta Valores
+              Gestão de consultoria empresarial
             </h1>
             <p className="mt-3 text-sm leading-6 text-stone-600">
-              Acesse o painel para acompanhar prospecção, diagnósticos, propostas
-              e follow-ups.
+              Acesse o painel para acompanhar prospecção, diagnósticos, propostas,
+              projetos e follow-ups.
             </p>
           </div>
           <Suspense>
@@ -37,12 +37,12 @@ export default function LoginPage() {
         </div>
         <div className="grid grid-cols-3 gap-4 text-sm text-stone-300">
           <div>
-            <strong className="block text-2xl text-brand-light">6</strong>
-            setores avaliados
-          </div>
-          <div>
             <strong className="block text-2xl text-brand-light">360</strong>
             visão consultiva
+          </div>
+          <div>
+            <strong className="block text-2xl text-brand-light">PDF</strong>
+            proposta profissional
           </div>
           <div>
             <strong className="block text-2xl text-brand-light">CRM</strong>

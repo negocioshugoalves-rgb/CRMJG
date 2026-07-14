@@ -1,4 +1,4 @@
-﻿# CRM JG Represent
+# CRM Consultivo
 
 Projeto Next.js pronto para GitHub e Vercel para uma consultoria empresarial. O fluxo principal cobre cliente, diagnóstico empresarial, plano de ação, proposta em PDF, projeto aceito e relatórios de acompanhamento com indicadores.
 

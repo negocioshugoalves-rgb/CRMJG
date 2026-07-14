@@ -1,4 +1,4 @@
-﻿export type StatusFunil =
+export type StatusFunil =
   | 'prospeccao'
   | 'diagnostico'
   | 'proposta'
@@ -151,5 +151,8 @@ export interface ConfiguracaoEmpresa {
   cargo_responsavel: string | null
   logo_url: string | null
   descricao: string | null
+  cor_primaria: string | null
+  cor_secundaria: string | null
+  cor_destaque: string | null
 }
 
