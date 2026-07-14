@@ -31,6 +31,24 @@ create table if not exists public.usuarios (
   criado_em timestamptz not null default now(),
   atualizado_em timestamptz not null default now()
 );
+create table if not exists public.configuracoes_empresa (
+  id integer primary key default 1 check (id = 1),
+  nome_fantasia text,
+  razao_social text,
+  cnpj text,
+  endereco text,
+  cidade_estado text,
+  telefone text,
+  email text,
+  site text,
+  responsavel text,
+  cargo_responsavel text,
+  logo_url text,
+  descricao text,
+  atualizado_por uuid references auth.users(id),
+  criado_em timestamptz not null default now(),
+  atualizado_em timestamptz not null default now()
+);
 
 create table if not exists public.empresas (
   id uuid primary key default gen_random_uuid(),
@@ -168,7 +186,7 @@ $$;
 do $$
 declare table_name text;
 begin
-  foreach table_name in array array['usuarios','empresas','diagnosticos','planos_acao','propostas','projetos','indicadores','relatorios'] loop
+  foreach table_name in array array['usuarios','configuracoes_empresa','empresas','diagnosticos','planos_acao','propostas','projetos','indicadores','relatorios'] loop
     execute format('drop trigger if exists %I on public.%I', table_name || '_set_updated_at', table_name);
     execute format('create trigger %I before update on public.%I for each row execute function public.set_updated_at()', table_name || '_set_updated_at', table_name);
   end loop;
@@ -199,6 +217,7 @@ where id in (select id from primeiro_usuario)
   and tipo <> 'master';
 
 alter table public.usuarios enable row level security;
+alter table public.configuracoes_empresa enable row level security;
 alter table public.empresas enable row level security;
 alter table public.diagnosticos enable row level security;
 alter table public.planos_acao enable row level security;
@@ -217,6 +236,15 @@ begin
   end loop;
 end $$;
 
+
+drop policy if exists "Usuarios autenticados leem configuracoes_empresa" on public.configuracoes_empresa;
+create policy "Usuarios autenticados leem configuracoes_empresa" on public.configuracoes_empresa for select to authenticated using (true);
+
+drop policy if exists "Usuarios autenticados inserem configuracoes_empresa" on public.configuracoes_empresa;
+create policy "Usuarios autenticados inserem configuracoes_empresa" on public.configuracoes_empresa for insert to authenticated with check (true);
+
+drop policy if exists "Usuarios autenticados atualizam configuracoes_empresa" on public.configuracoes_empresa;
+create policy "Usuarios autenticados atualizam configuracoes_empresa" on public.configuracoes_empresa for update to authenticated using (true) with check (true);
 drop policy if exists "Usuarios autenticados leem usuarios" on public.usuarios;
 create policy "Usuarios autenticados leem usuarios" on public.usuarios for select to authenticated using (true);
 
@@ -255,6 +283,8 @@ create policy "Usuarios autenticados criam relatorios" on public.relatorios for 
 
 drop policy if exists "Usuarios autenticados criam interacoes" on public.interacoes;
 create policy "Usuarios autenticados criam interacoes" on public.interacoes for insert to authenticated with check (auth.uid() = criado_por);
+
+
 
 
 

@@ -137,4 +137,19 @@ export interface Interacao {
   data: string
   proximo_followup: string | null
 }
+export interface ConfiguracaoEmpresa {
+  id: number
+  nome_fantasia: string | null
+  razao_social: string | null
+  cnpj: string | null
+  endereco: string | null
+  cidade_estado: string | null
+  telefone: string | null
+  email: string | null
+  site: string | null
+  responsavel: string | null
+  cargo_responsavel: string | null
+  logo_url: string | null
+  descricao: string | null
+}
 
