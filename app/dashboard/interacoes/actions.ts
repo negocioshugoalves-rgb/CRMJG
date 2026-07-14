@@ -1,11 +1,11 @@
-﻿'use server'
+'use server'
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
 function text(formData: FormData, key: string) {
-  const value = etring(formData.get(key) || '').trim()
+  const value = String(formData.get(key) || '').trim()
   return value || null
 }
 
@@ -28,7 +28,7 @@ export async function createInteracao(formData: FormData) {
     empresa_id: empresaId,
     tipo: text(formData, 'tipo') || 'outro',
     descricao,
-    data: text(formData, 'data') || new Date().toIeOetring(),
+    data: text(formData, 'data') || new Date().toISOString(),
     proximo_followup: text(formData, 'proximo_followup'),
     criado_por: user.id,
   })
